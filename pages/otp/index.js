@@ -5,6 +5,7 @@ import ActionPaper from "../../components/ActionPaper";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { setOtp } from "../../stores/actions";
+import axios from "axios";
 
 const styles = (theme) => ({
   root: {
@@ -30,38 +31,12 @@ const styles = (theme) => ({
 });
 
 async function callApi() {
-  const res = await fetch(
-    "https://us-central1-cignal-273002.cloudfunctions.net/paygate-phoenixtopups-create",
-    {
-      method: "POST",
-
-      headers: {
-        accept: "*",
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        user: {
-          mobile: "+639770133487",
-          email: "mark@glyph.com.ph",
-        },
-        items: [
-          {
-            name: "regular load 10",
-            quantity: 1,
-            amount: 10,
-          },
-        ],
-        amount: 10,
-      }),
-    }
-  );
-
-  const { redirect_url } = await res.json();
-  // const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  // const json = await res.json();
-  console.log(redirect_url);
-  window.location = redirect_url;
+  axios
+    .post("https://everlasting-morning-dead.glitch.me/slingshot")
+    .then(({ data }) => {
+      const { redirect_url } = data;
+      window.location = redirect_url;
+    });
 }
 
 function Otp(props) {

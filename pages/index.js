@@ -1,18 +1,51 @@
-import { Box, Container } from "@material-ui/core";
+import { Fragment, useState } from "react";
+import { Button, Grid, withStyles, withWidth } from "@material-ui/core";
+import ActionPaper from "../components/ActionPaper";
+import Amount from "../components/topup/Amount";
+import { useSelector } from "react-redux";
+import Link from "next/link";
 
-export default function Home() {
+const styles = (theme) => ({
+  root: {
+    marginTop: "60px",
+  },
+});
+
+function Topup(props) {
+  const [loading, setLoading] = useState(false);
+  const accountNo = useSelector((state) => state.accountNo);
+  const amount = useSelector((state) => state.amount);
+  const captcha = useSelector((state) => state.captcha);
+  const { classes } = props;
+
   return (
-    <Container>
-      <Box my={2}>
-        {[...new Array(42)]
-          .map(
-            () => `Cras mattis consectetur purus sit amet fermentum.
-                  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-          )
-          .join("\n")}
-      </Box>
-    </Container>
+    <Fragment>
+      <Grid className={classes.root} container direction="row" justify="center">
+        <ActionPaper
+          helpPadding
+          maxWidth="md"
+          title="Top up your account"
+          content={<Amount />}
+          actions={
+            <Fragment>
+              <Link href={"/otp"} passHref>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  size="large"
+                  disabled={!accountNo || !amount || !captcha}
+                >
+                  Proceed {loading && <ButtonCircularProgress />}
+                </Button>
+              </Link>
+            </Fragment>
+          }
+        />
+      </Grid>
+    </Fragment>
   );
 }
+
+export default withWidth()(withStyles(styles, { withTheme: true })(Topup));

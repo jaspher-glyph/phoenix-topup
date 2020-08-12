@@ -9,7 +9,7 @@ import {
   Typography,
   useScrollTrigger,
 } from "@material-ui/core";
-import ButtonLink from "./ButtonLink";
+import Link from "next/link";
 
 function HideOnScroll(props) {
   const { children } = props;
@@ -22,14 +22,18 @@ function HideOnScroll(props) {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+const useStyles = makeStyles(
+  {
+    root: {
+      flexGrow: 1,
+    },
+    title: {
+      flexGrow: 1,
+      cursor: "pointer",
+    },
   },
-  title: {
-    flexGrow: 1,
-  },
-}));
+  { name: "MuiHeaderComponent" }
+);
 
 export default function Navigation(props) {
   const classes = useStyles();
@@ -39,13 +43,23 @@ export default function Navigation(props) {
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              Phoenix Top Up
-            </Typography>
-            <ButtonLink color="inherit" href={"/topup"} title="Top Up" />
-            <ButtonLink color="inherit" href={"/apply"} title="Apply Now" />
-            <Button color="inherit">Check Application</Button>
-            <Button color="inherit">Contact Us</Button>
+            <Link href={"/"} passHref>
+              <Typography className={classes.title} variant="h6">
+                Phoenix Top Up
+              </Typography>
+            </Link>
+            <Link href={"/topup"} passHref>
+              <Button color="inherit">Top Up</Button>
+            </Link>
+            <Link href={"/terms"} passHref>
+              <Button color="inherit">Terms of Service</Button>
+            </Link>
+            <Link href={"/policy"} passHref>
+              <Button color="inherit">Privacy Policy</Button>
+            </Link>
+            <Link href={"#contact"} passHref>
+              <Button color="inherit">Contact Us</Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

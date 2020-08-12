@@ -1,16 +1,33 @@
-import styles from "./../../styles/Home.module.css";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import ContactUs from "../ContactUs";
 
-export default function Footer() {
+const useStyles = makeStyles(
+  (theme) => ({
+    root: {
+      position: "sticky",
+      left: 0,
+      bottom: 0,
+      width: "100%",
+      background: theme.palette.common.darkBlack,
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.common.white,
+      fontWeight: 500,
+      fontSize: "1.2em",
+    },
+  }),
+  { name: "MuiFooterComponent" }
+);
+
+const Footer = (props) => {
+  const classes = useStyles();
   return (
-    <footer>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by{" "}
-        <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-      </a>
+    <footer className={classes.root}>
+      <ContactUs />
+      <div id="contact">© 2020 Team Phoenix</div>
     </footer>
   );
-}
+};
+
+export default Footer;

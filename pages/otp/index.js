@@ -16,7 +16,7 @@ const styles = (theme) => ({
     margin: "1rem",
   },
   otpInput: {
-    width: "4rem",
+    width: "20%",
     height: "4rem",
     marginTop: 0,
     marginBottom: 0,
@@ -83,40 +83,44 @@ function Otp(props) {
 
   return (
     <Fragment>
-      <Grid className={classes.root} container direction="row" justify="center">
-        <Grid item xs={12} md={4}>
-          <ActionPaper
-            helpPadding
-            maxWidth="md"
-            title="We send your mobile an OTP to proceed in your transaction. Kindly input the 6 digit code"
-            titleVariant="h6"
-            content={
-              <OtpForm
-                length={OTP_LENGTH}
-                className={classes.otpContainer}
-                inputClassName={classes.otpInput}
-                isNumberInput
-                autoFocus
-                onChangeOTP={(otp) => dispatch(setOtp(otp))}
-              />
-            }
-            actions={
-              <Fragment>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  size="large"
-                  disabled={!otp || otp.length < OTP_LENGTH}
-                  onClick={() => callApi()}
-                >
-                  Submit OTP {loading && <ButtonCircularProgress />}
-                </Button>
-              </Fragment>
-            }
-          />
-        </Grid>
+      <Grid
+        className={classes.root}
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        <ActionPaper
+          helpPadding
+          maxWidth="sm"
+          title="We send your mobile an OTP to proceed in your transaction. Kindly input the 6 digit code"
+          titleVariant="h6"
+          content={
+            <OtpForm
+              length={OTP_LENGTH}
+              className={classes.otpContainer}
+              inputClassName={classes.otpInput}
+              isNumberInput
+              autoFocus
+              onChangeOTP={(otp) => dispatch(setOtp(otp))}
+            />
+          }
+          actions={
+            <Fragment>
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                type="submit"
+                size="large"
+                disabled={!otp || otp.length < OTP_LENGTH}
+                onClick={() => callApi()}
+              >
+                Submit OTP {loading && <ButtonCircularProgress />}
+              </Button>
+            </Fragment>
+          }
+        />
       </Grid>
     </Fragment>
   );

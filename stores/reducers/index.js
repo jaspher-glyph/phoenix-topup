@@ -6,6 +6,8 @@ const initialState = {
   amount: undefined,
   otp: undefined,
   captcha: undefined,
+  denom: undefined,
+  mobile: undefined,
 };
 
 function reducer(state = initialState, action) {
@@ -36,6 +38,18 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         ...{ captcha: action.captcha },
+      };
+
+    case actionTypes.SET_DENOM:
+      return {
+        ...state,
+        ...{ denom: action.denom },
+      };
+
+    case actionTypes.SET_MOBILE:
+      return {
+        ...state,
+        ...{ mobile: action.mobile },
       };
 
     default:

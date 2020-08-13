@@ -42,8 +42,8 @@ async function callApi() {
 function Otp(props) {
   const { classes } = props;
   const [loading, setLoading] = useState(false);
-  const accountNo = useSelector((state) => state.accountNo);
-  const amount = useSelector((state) => state.amount);
+  const mobile = useSelector((state) => state.mobile);
+  const denom = useSelector((state) => state.denom);
   const captcha = useSelector((state) => state.captcha);
   const otp = useSelector((state) => state.otp);
   const OTP_LENGTH = 6;
@@ -51,7 +51,7 @@ function Otp(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!accountNo || !amount || !captcha) {
+    if (!mobile || !denom || !captcha) {
       router.push("/topup");
     }
   });

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import {
   Box,
   FormControl,
@@ -6,11 +6,11 @@ import {
   TextField,
   withStyles,
 } from "@material-ui/core";
-import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import PhoneAndroid from "@material-ui/icons/PhoneAndroid";
 import ReCAPTCHA from "react-google-recaptcha";
-import { setAccountNo, setAmount, setCaptcha } from "../../stores/actions";
+import { setMobile, setCaptcha } from "../../stores/actions";
 import { useDispatch } from "react-redux";
+import Denom from "./Denom";
 
 const styles = (theme) => ({
   root: {
@@ -32,10 +32,6 @@ const styles = (theme) => ({
   },
 });
 
-function onChange(value) {
-  console.log("Captcha value:", value);
-}
-
 function Amount(props) {
   const { classes } = props;
   const dispatch = useDispatch();
@@ -47,38 +43,28 @@ function Amount(props) {
           <TextField
             id="outlined-basic"
             variant="outlined"
-            label="Account Number"
-            helperText="e.g. 1002123456789"
+            label="Mobile"
+            helperText="e.g. 09770133487"
             type="number"
             autoFocus={true}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AccountCircle />
+                  <PhoneAndroid />
                 </InputAdornment>
               ),
             }}
-            onChange={(e) => dispatch(setAccountNo(e.target.value))}
+            onChange={(e) => dispatch(setMobile(e.target.value))}
           />
         </FormControl>
-        <FormControl fullWidth>
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            label="Amount"
-            helperText="e.g. 10"
-            type="number"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MonetizationOnIcon />
-                </InputAdornment>
-              ),
-            }}
-            onChange={(e) => dispatch(setAmount(e.target.value))}
-          />
-        </FormControl>
-        <Box px={2}>
+        <Denom />
+        <Box
+          px={2}
+          display="flex"
+          justifyContent="center"
+          width="100%"
+          alignItems="center"
+        >
           <ReCAPTCHA
             sitekey="6Lecor0ZAAAAAHrGng8WgIcJ6GZJpmDWjIObTBaJ"
             onChange={(e) => dispatch(setCaptcha(e))}

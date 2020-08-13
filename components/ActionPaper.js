@@ -16,9 +16,6 @@ const styles = (theme) => ({
       paddingRight: theme.spacing(1),
     },
   },
-  fullWidth: {
-    width: "100%",
-  },
 });
 
 function ActionPaper(props) {

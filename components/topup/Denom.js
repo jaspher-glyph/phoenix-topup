@@ -20,6 +20,10 @@ const styles = (theme) => ({
   tab: {
     "& .MuiButtonBase-root": {
       flex: 1,
+      "&:hover": {
+        background: theme.palette.primary.light,
+        color: "#fff",
+      },
     },
   },
   item: {

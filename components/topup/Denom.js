@@ -14,7 +14,7 @@ import {
 import PropTypes from "prop-types";
 import { map } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { setDenom } from "../../stores/actions";
+import { setAmount, setDenom } from "../../stores/actions";
 
 const styles = (theme) => ({
   tab: {
@@ -93,6 +93,10 @@ function Denom(prop) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handleDenom = ({ title, amount }) => {
+    dispatch(setDenom(title));
+    dispatch(setAmount(amount));
+  };
 
   return (
     <Box pb={1}>
@@ -126,7 +130,7 @@ function Denom(prop) {
                     className={`${classes.item} ${
                       denom == o.title ? classes.active : null
                     }`}
-                    onClick={() => dispatch(setDenom(o.title))}
+                    onClick={() => handleDenom(o)}
                   >
                     <ListItemText
                       primary={o.title}

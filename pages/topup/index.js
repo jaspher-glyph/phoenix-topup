@@ -37,7 +37,7 @@ function Topup(props) {
                   color="secondary"
                   type="submit"
                   size="large"
-                  disabled={!mobile || !denom || !captcha}
+                  disabled={!mobile || !denom || !captcha || !amount}
                 >
                   Proceed {loading && <ButtonCircularProgress />}
                 </Button>

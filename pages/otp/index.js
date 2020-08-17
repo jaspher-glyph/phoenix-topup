@@ -30,13 +30,20 @@ const styles = (theme) => ({
   },
 });
 
-async function callApi() {
-  axios
-    .post("https://everlasting-morning-dead.glitch.me/slingshot")
-    .then(({ data }) => {
-      const { redirect_url } = data;
-      window.location = redirect_url;
-    });
+async function callApi(mobile, amount, denom) {
+  axios({
+    method: "post",
+    headers: { "content-type": "application/json" },
+    url: "https://everlasting-morning-dead.glitch.me/slingshot",
+    data: {
+      mobile,
+      amount,
+      denom,
+    },
+  }).then(({ data }) => {
+    const { redirect_url } = data;
+    window.location = redirect_url;
+  });
 }
 
 function Otp(props) {
@@ -44,6 +51,7 @@ function Otp(props) {
   const [loading, setLoading] = useState(false);
   const mobile = useSelector((state) => state.mobile);
   const denom = useSelector((state) => state.denom);
+  const amount = useSelector((state) => state.amount);
   const captcha = useSelector((state) => state.captcha);
   const otp = useSelector((state) => state.otp);
   const OTP_LENGTH = 6;
@@ -51,7 +59,7 @@ function Otp(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!mobile || !denom || !captcha) {
+    if (!mobile || !denom || !captcha || !amount) {
       router.push("/topup");
     }
   });
@@ -89,7 +97,7 @@ function Otp(props) {
                 type="submit"
                 size="large"
                 disabled={!otp || otp.length < OTP_LENGTH}
-                onClick={() => callApi()}
+                onClick={() => callApi(mobile, amount, denom)}
               >
                 Submit OTP {loading && <ButtonCircularProgress />}
               </Button>

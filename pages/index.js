@@ -14,6 +14,7 @@ const styles = (theme) => ({
 function Topup(props) {
   const [loading, setLoading] = useState(false);
   const mobile = useSelector((state) => state.mobile);
+  const amount = useSelector((state) => state.amount);
   const denom = useSelector((state) => state.denom);
   const captcha = useSelector((state) => state.captcha);
   const { classes } = props;
@@ -35,7 +36,7 @@ function Topup(props) {
                   color="secondary"
                   type="submit"
                   size="large"
-                  disabled={!mobile || !denom || !captcha}
+                  disabled={!mobile || !denom || !captcha || !amount}
                 >
                   Proceed {loading && <ButtonCircularProgress />}
                 </Button>

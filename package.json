@@ -3,27 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p 8000",
+    "dev": "env-cmd -f config/.env.dev.json next dev",
+    "build": "env-cmd -f config/.env.dev.json next build",
+    "start": "env-cmd -f config/.env.dev.json next start",
+    "build:uat": "env-cmd -f config/.env.uat.json next build",
+    "start:uat": "env-cmd -f config/.env.uat.json next start",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@mui-treasury/components": "^1.9.1",
     "axios": "^0.19.2",
+    "clsx": "^1.1.1",
+    "connected-next-router": "^3.1.0",
+    "crypto-js": "^4.0.0",
+    "env-cmd": "^10.1.0",
+    "immer": "^7.0.8",
     "lodash": "^4.17.19",
+    "moment": "^2.27.0",
     "next": "9.5.1",
+    "next-nprogress": "^1.4.0",
     "next-redux-wrapper": "^6.0.2",
+    "nookies": "^2.4.0",
+    "nprogress": "^0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-draggable": "^4.4.3",
     "react-google-recaptcha": "^2.1.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-saga": "^1.1.3"
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3",
+    "store": "^2.0.12"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "redux-devtools-extension": "^2.13.8"
   }
 }

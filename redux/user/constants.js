@@ -1,0 +1,19 @@
+export const DEFAULT_ACTION = 'USER/DEFAULT_ACTION'
+
+export const USER_LOGGED_IN = 'USER/USER_LOGGED_IN'
+export const USER_CHECK_REQUESTED = 'USER/USER_CHECK_REQUESTED'
+export const USER_LOGGED_OUT = 'USER/USER_LOGGED_OUT'
+export const USER_LOADING = 'USER/USER_LOADING'
+export const GET_USER_PROFILE = 'USER/GET_USER_PROFILE'
+export const GET_PROFILE_RESPONSE = 'USER/GET_PROFILE_RESPONSE'
+
+export const USER_LOGGED_IN_FAILED = 'USER/USER_LOGGED_IN_FAILED'
+
+export const USER_DISABLED = 10105
+export const USER_UNAUTHORIZED = 100003
+export const USER_INCORRECT = 'LOGIN_FAILED'
+export const USER_DISABLED_ERROR = 'Your account is disabled, please contact administrator.'
+export const USER_INCORRECT_ERROR = 'Your credentials are incorrect.'
+
+export const USER_LOAD_BALANCE = 'USER/LOAD_BALANCE'
+export const SET_USER_WALLET = 'USER/SET_USER_WALLET'

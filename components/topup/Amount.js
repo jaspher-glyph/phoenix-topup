@@ -1,40 +1,34 @@
-import { Fragment } from "react";
-import {
-  Box,
-  FormControl,
-  InputAdornment,
-  TextField,
-  withStyles,
-} from "@material-ui/core";
-import PhoneAndroid from "@material-ui/icons/PhoneAndroid";
-import ReCAPTCHA from "react-google-recaptcha";
-import { setMobile, setCaptcha } from "../../stores/actions";
-import { useDispatch } from "react-redux";
-import Denom from "./Denom";
+import { Fragment } from 'react'
+import { Box, FormControl, InputAdornment, TextField, withStyles } from '@material-ui/core'
+import PhoneAndroid from '@material-ui/icons/PhoneAndroid'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { setMobile, setCaptcha } from '../../stores/actions'
+import { useDispatch } from 'react-redux'
+import Denom from './Denom'
 
 const styles = (theme) => ({
   root: {
-    "& .MuiTextField-root": {
+    '& .MuiTextField-root': {
       // margin: theme.spacing(2),
     },
   },
   inputRoot: {
     width: 190,
-    "@media (max-width:  400px)": {
+    '@media (max-width:  400px)': {
       width: 160,
     },
-    "@media (max-width:  360px)": {
+    '@media (max-width:  360px)': {
       width: 140,
     },
-    "@media (max-width:  340px)": {
+    '@media (max-width:  340px)': {
       width: 120,
     },
   },
-});
+})
 
 function Amount(props) {
-  const { classes } = props;
-  const dispatch = useDispatch();
+  const { classes } = props
+  const dispatch = useDispatch()
 
   return (
     <Fragment>
@@ -58,13 +52,7 @@ function Amount(props) {
           />
         </FormControl>
         <Denom />
-        <Box
-          px={2}
-          display="flex"
-          justifyContent="center"
-          width="100%"
-          alignItems="center"
-        >
+        <Box pt={1} px={2} display="flex" justifyContent="center" width="100%" alignItems="center">
           <ReCAPTCHA
             sitekey="6Lecor0ZAAAAAHrGng8WgIcJ6GZJpmDWjIObTBaJ"
             onChange={(e) => dispatch(setCaptcha(e))}
@@ -72,7 +60,7 @@ function Amount(props) {
         </Box>
       </form>
     </Fragment>
-  );
+  )
 }
 
-export default withStyles(styles, { withTheme: true })(Amount);
+export default withStyles(styles, { withTheme: true })(Amount)

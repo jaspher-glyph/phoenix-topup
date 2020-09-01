@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   Box,
   List,
@@ -10,61 +10,61 @@ import {
   Typography,
   withStyles,
   withWidth,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
-import { map } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
-import { setAmount, setDenom } from "../../stores/actions";
+} from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { map } from 'lodash'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAmount, setDenom, setSku } from 'redux/order/actions'
 
 const styles = (theme) => ({
   tab: {
-    "& .MuiButtonBase-root": {
+    '& .MuiButtonBase-root': {
       flex: 1,
-      "&:hover": {
+      '&:hover': {
         background: theme.palette.primary.light,
-        color: "#fff",
+        color: '#fff',
       },
     },
   },
   item: {
-    "&.MuiListItem-root": {
-      "&:hover": {
+    '&.MuiListItem-root': {
+      '&:hover': {
         background: theme.palette.primary.light,
-        color: "#fff",
-        "& .MuiTypography-root": {
-          color: "#fff",
+        color: '#fff',
+        '& .MuiTypography-root': {
+          color: '#fff',
         },
-        "& .MuiBox-root": {
-          borderColor: "#fff",
+        '& .MuiBox-root': {
+          borderColor: '#fff',
         },
       },
     },
   },
   active: {
     background: theme.palette.primary.main,
-    color: "#fff",
-    "& .MuiTypography-root": {
-      color: "#fff",
+    color: '#fff',
+    '& .MuiTypography-root': {
+      color: '#fff',
     },
-    "&:hover": {
+    '&:hover': {
       background: theme.palette.primary.light,
     },
   },
   denomContainer: {
-    [theme.breakpoints.up("sm")]: {
-      width: theme.breakpoints.values["sm"],
+    [theme.breakpoints.up('sm')]: {
+      width: theme.breakpoints.values['sm'],
     },
   },
-});
+})
 
 const defaultProps = {
   m: 2,
   border: 1,
-  style: { width: "50px", height: "50px" },
-};
+  style: { width: '50px', height: '50px' },
+}
 
 function TabPanel(props) {
-  const { className, children, value, index, ...other } = props;
+  const { className, children, value, index, ...other } = props
   return (
     <div
       role="tabpanel"
@@ -76,27 +76,29 @@ function TabPanel(props) {
     >
       {value === index && <Box>{children}</Box>}
     </div>
-  );
+  )
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
-};
+}
 
 function Denom(prop) {
-  const { classes } = prop;
-  const dispatch = useDispatch();
-  const denom = useSelector((state) => state.denom);
-  const [value, setValue] = useState(0);
+  const { classes } = prop
+  const dispatch = useDispatch()
+  const denom = useSelector((state) => state.order.denom)
+  const sku = useSelector((state) => state.order.sku)
+  const [value, setValue] = useState(0)
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleDenom = ({ title, amount }) => {
-    dispatch(setDenom(title));
-    dispatch(setAmount(amount));
-  };
+    setValue(newValue)
+  }
+  const handleDenom = ({ title, amount, sku }) => {
+    dispatch(setDenom(title))
+    dispatch(setAmount(amount))
+    dispatch(setSku(sku))
+  }
 
   return (
     <Box pb={1}>
@@ -117,7 +119,7 @@ function Denom(prop) {
           <TabPanel
             value={value}
             index={Object.keys(obj).indexOf(key)}
-            key={"TabPanel-" + key}
+            key={'TabPanel-' + key}
             className={classes.denomContainer}
           >
             <List>
@@ -126,22 +128,20 @@ function Denom(prop) {
                   <ListItem
                     button
                     divider
-                    key={"Item" + k}
-                    className={`${classes.item} ${
-                      denom == o.title ? classes.active : null
-                    }`}
+                    key={'Item' + k}
+                    className={`${classes.item} ${sku == o.sku ? classes.active : null}`}
                     onClick={() => handleDenom(o)}
                   >
                     <ListItemText
                       primary={o.title}
                       secondary={o.description}
-                      style={{ width: "80%" }}
-                    />{" "}
+                      style={{ width: '80%' }}
+                    />{' '}
                     <Box
                       display="flex"
                       borderRadius="50%"
                       {...defaultProps}
-                      borderColor={denom == o.title ? "#fff" : "text.primary"}
+                      borderColor={denom == o.title ? '#fff' : 'text.primary'}
                       justify="center"
                       justifyContent="center"
                       alignItems="center"
@@ -154,87 +154,104 @@ function Denom(prop) {
                       </Typography>
                     </Box>
                   </ListItem>
-                );
+                )
               })}
             </List>
           </TabPanel>
-        );
+        )
       })}
     </Box>
-  );
+  )
 }
 
 const denominations = {
   regular: [
     {
-      title: "Regular Load 10",
-      description: "Get 10 load amount",
-      amount: "10",
+      sku: 'GLYSMART20',
+      title: 'GLY-Smart Eload 20',
+      description: '20 airtime load and valid for 30 days',
+      amount: '20',
     },
     {
-      title: "Regular Load 30",
-      description: "Get 30 load amount",
-      amount: "30",
+      sku: 'GLYSMART30',
+      title: 'GLY-Smart Eload Economy (P30)',
+      description: '30 airtime load and valid for 15 days',
+      amount: '30',
     },
     {
-      title: "Regular Load 50",
-      description: "Get 50 load amount",
-      amount: "50",
+      sku: 'GLYSMART60',
+      title: 'GLY-Smart Eload Regular (P60)',
+      description: '60 airitme load and valid for 30 days',
+      amount: '60',
     },
     {
-      title: "Regular Load 100",
-      description: "Get 100 load amount",
-      amount: "100",
+      sku: 'GLYSMART100',
+      title: 'GLY-Smart Eload 100',
+      description: '100 aitime load and valid for 30 days',
+      amount: '100',
     },
   ],
   calltext: [
     {
-      title: "Call and Text 10",
-      description: "Get 10 load amount",
-      amount: "10",
+      sku: 'GLYSMALLTXTPLUS20',
+      title: 'GLY-Smart All Text Plus 20',
+      description:
+        'Unlitext to all network + 20 min calls to SMART/TNT/SUN + All day chat and Surf and valid for 1 day',
+      amount: '20',
     },
     {
-      title: "Call and Text 30",
-      description: "Get 30 load amount",
-      amount: "30",
+      sku: 'GLYSMAI25',
+      title: 'GLY-Smart All-in 25',
+      description:
+        'Unlimited SMS to all network + 60mins call for Smart/TnT & Sun + 100MB valid for 1 day',
+      amount: '25',
     },
     {
-      title: "Call and Text 50",
-      description: "Get 50 load amount",
-      amount: "50",
+      sku: 'GLYSMBRO50',
+      title: 'GLY-Smart BRO 50',
+      description: 'Up to 150 minutes valid for 15 days',
+      amount: '50',
     },
     {
-      title: "Call and Text 100",
-      description: "Get 100 load amount",
-      amount: "100",
+      sku: 'GLYSMALLTXT50',
+      title: 'GLY-Smart All Text 50',
+      description: '300 Smart to Smart/TNT + 30 texts to all networks and valid for 3 days',
+      amount: '50',
     },
   ],
   data: [
+    // {
+    //   sku: 'GLYSMBB10',
+    //   title: 'GLY-Smart Big Bytes 10',
+    //   description: '30MB mobile internet surfing + 250MB music streaming from Spinnr',
+    //   amount: '10',
+    // },
     {
-      title: "GIGASTUDY 99",
-      description:
-        "Enjoy 1 GB per day of Youtube, Google Meet, Google, etc. Valid for 7 days",
-      amount: "99",
+      sku: 'GLYSMBROBB15',
+      title: 'GLY-Smart BigBytes 15 (Buddy BRO)',
+      description: '40 MB data with 300 MB for Spinnr for 2 days',
+      amount: '15',
     },
     {
-      title: "GIGAVIDEO 50",
-      description:
-        "Enjoy 1 GB of Youtube, IwantTV, Youtube Music, etc. and UNLITEXT to all networks. Valid for 3 days",
-      amount: "50",
+      sku: 'GLYSMBROBB30',
+      title: 'GLY-BigBytes 30 (Bro)',
+      description: '100MB + freebies 400MB Spinnr (music streaming) valid for 1 day',
+      amount: '30',
     },
     {
-      title: "GIGAVIDEO+ 75",
-      description:
-        "Enjoy 1 GB of Video and UNLITEXT to all netwoEnjoy 1 GB of Youtube, IwantTV, Youtube Music, etc. and UNLITEXT to all networks + UNLICALL to Smart/TNT/Sun. Valid for 3 days",
-      amount: "75",
+      sku: 'GLYSMBROSURFMAX50',
+      title: 'GLY-Smart BRO Surf Max 50',
+      description: 'All day surfing valid for 1 day',
+      amount: '50',
     },
     {
-      title: "GIGAVIDEO+ 100",
+      sku: 'GLYSMGS99',
+      title: 'GLY-Smart Giga Surf 99',
       description:
-        "Enjoy 1 GB of Video and UNLITEXT to all netwoEnjoy 1 GB of Youtube, IwantTV, Youtube Music, etc. and UNLITEXT to all networks + UNLICALL to all networks. Valid for 3 days",
-      amount: "100",
+        '2GB data + 1GB/day of Video every day for Youtube/iFlix/iWant TV/NBA League Pass/Cignal TV valid for 7 days',
+      amount: '99',
     },
   ],
-};
+}
 
-export default withWidth()(withStyles(styles, { withTheme: true })(Denom));
+export default withWidth()(withStyles(styles, { withTheme: true })(Denom))

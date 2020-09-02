@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
+import Snackbar from '@material-ui/core/Snackbar'
 import withWidth from '@material-ui/core/withWidth'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
@@ -40,6 +41,11 @@ const useStyles = (theme) => ({
   submitLoading: {
     margin: theme.spacing(1, 0, 0),
   },
+  snack: {
+    '&.MuiSnackbar-root': {
+      top: '90px !important',
+    },
+  },
 })
 
 const SignIn = (props) => {
@@ -61,69 +67,78 @@ const SignIn = (props) => {
     return
   }, [user])
 
+  const handleSnackClose = () => {}
+
   return (
-    <Container component="main" maxWidth="xs">
-      {error && (
-        <Alert severity="error" visible={error}>
-          <AlertTitle>Error</AlertTitle>
-          {error}
-        </Alert>
-      )}
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography color="primary" component="h1" variant="h5">
-          Login
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            onChange={(e) => setForm({ ...form, username: e.target.value })}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
-          {/* <FormControlLabel
+    <>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Snackbar
+          className={classes.snack}
+          open={error ? true : false}
+          autoHideDuration={5000}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        </Snackbar>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography color="primary" component="h1" variant="h5">
+            Login
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              onChange={(e) => setForm({ ...form, username: e.target.value })}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+            {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={(e) => {
-              e.preventDefault()
-              dispatch(login(form))
-            }}
-            disabled={loading}
-          >
-            {loading && <CircularProgress className={classes.submitLoading} size={15} />}
-            {!loading && 'Sign In'}
-          </Button>
-        </form>
-      </div>
-    </Container>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={(e) => {
+                e.preventDefault()
+                dispatch(login(form))
+              }}
+              disabled={loading}
+            >
+              {loading && <CircularProgress className={classes.submitLoading} size={15} />}
+              {!loading && 'Sign In'}
+            </Button>
+          </form>
+        </div>
+      </Container>
+    </>
   )
 }
 

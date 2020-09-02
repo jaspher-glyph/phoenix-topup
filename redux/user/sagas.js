@@ -1,4 +1,4 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects'
+import { delay, takeLatest, call, put, all } from 'redux-saga/effects'
 import { loginOtp, getWallet } from 'lib/apiRequest'
 import store from 'store'
 import { setCookie } from 'nookies'

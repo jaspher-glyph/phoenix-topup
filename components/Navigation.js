@@ -10,7 +10,9 @@ import {
   useScrollTrigger,
 } from '@material-ui/core'
 import Link from 'next/link'
-import { parseCookies } from 'nookies'
+import { destroyCookie, parseCookies } from 'nookies'
+import Router from 'next/router'
+import store from 'store'
 
 function HideOnScroll(props) {
   const { children } = props
@@ -35,6 +37,12 @@ const useStyles = makeStyles(
   },
   { name: 'MuiHeaderComponent' },
 )
+
+const logout = () => {
+  destroyCookie(null, '_tsl:pa')
+  store.remove('_tsl:pa')
+  Router.push('/')
+}
 
 export default function Navigation(props) {
   const classes = useStyles()
@@ -68,9 +76,9 @@ export default function Navigation(props) {
               <Button color="inherit">Contact Us</Button>
             </Link> */}
             {token && (
-              <Link href="/logout" passHref>
-                <Button color="inherit">Log out</Button>
-              </Link>
+              <Button color="inherit" onClick={logout}>
+                Log out
+              </Button>
             )}
           </Toolbar>
         </AppBar>

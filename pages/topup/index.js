@@ -29,6 +29,11 @@ const styles = (theme) => ({
   root: {
     marginTop: '60px',
   },
+  snack: {
+    '&.MuiSnackbar-root': {
+      top: '90px !important',
+    },
+  },
 })
 
 function PaperComponent(props) {
@@ -123,9 +128,11 @@ function Topup(props) {
         </DialogActions>
       </Dialog>
       <Snackbar
+        className={classes.snack}
         open={orderMessage ? true : false}
         autoHideDuration={5000}
         onClose={handleSnackClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert onClose={handleSnackClose} severity={orderSucces ? 'success' : 'error'}>
           {orderMessage}

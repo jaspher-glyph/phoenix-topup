@@ -200,56 +200,51 @@ const denominations = {
       amount: '20',
     },
     {
-      sku: 'GLYSMAI25',
-      title: 'GLY-Smart All-in 25',
-      description:
-        'Unlimited SMS to all network + 60mins call for Smart/TnT & Sun + 100MB valid for 1 day',
-      amount: '25',
-    },
-    {
-      sku: 'GLYSMBRO50',
-      title: 'GLY-Smart BRO 50',
-      description: 'Up to 150 minutes valid for 15 days',
-      amount: '50',
-    },
-    {
-      sku: 'GLYSMALLTXT50',
-      title: 'GLY-Smart All Text 50',
-      description: '300 Smart to Smart/TNT + 30 texts to all networks and valid for 3 days',
-      amount: '50',
-    },
-  ],
-  data: [
-    // {
-    //   sku: 'GLYSMBB10',
-    //   title: 'GLY-Smart Big Bytes 10',
-    //   description: '30MB mobile internet surfing + 250MB music streaming from Spinnr',
-    //   amount: '10',
-    // },
-    {
-      sku: 'GLYSMBROBB15',
-      title: 'GLY-Smart BigBytes 15 (Buddy BRO)',
-      description: '40 MB data with 300 MB for Spinnr for 2 days',
-      amount: '15',
-    },
-    {
-      sku: 'GLYSMBROBB30',
-      title: 'GLY-BigBytes 30 (Bro)',
-      description: '100MB + freebies 400MB Spinnr (music streaming) valid for 1 day',
+      sku: 'GLYSMUCT30',
+      title: 'GLY-Smart Enhanced UCT 30',
+      description: '100MB Data w/ Unli Trinet calls + Unli All Net SMS for 1 Day',
       amount: '30',
     },
     {
-      sku: 'GLYSMBROSURFMAX50',
-      title: 'GLY-Smart BRO Surf Max 50',
-      description: 'All day surfing valid for 1 day',
+      sku: 'GLYSMUCT50',
+      title: 'GLY-Smart Enhanced UCT 50',
+      description: 'Unli Trinet Calls + UNLI AllNet SMS + 50MB internet valid for 3 days',
       amount: '50',
     },
     {
-      sku: 'GLYSMGS99',
-      title: 'GLY-Smart Giga Surf 99',
+      sku: 'GLYSMUCT100',
+      title: 'GLY-Smart UCT 100',
       description:
-        '2GB data + 1GB/day of Video every day for Youtube/iFlix/iWant TV/NBA League Pass/Cignal TV valid for 7 days',
-      amount: '99',
+        'UNLI calls & texts to Smart/TNT + 80 texts to All Net & Free 30MB for chat & surf valid for 4 days',
+      amount: '100',
+    },
+  ],
+  data: [
+    {
+      sku: 'GLYSMALLOUTSURF20',
+      title: 'GLY-All Out Surf 20',
+      description:
+        '150MB Data + Unlimited Facebook Unlimited texts to all networks 20 Min calls to Smart & TNT and Sun',
+      amount: '20',
+    },
+    {
+      sku: 'GLYSMSURFMAXPLS50',
+      title: 'GLY-Smart Surf Max Plus 50',
+      description: '4G/LTE all day surfing valid for 1 day',
+      amount: '50',
+    },
+    {
+      sku: 'GLYSMBROGIGASURFS50',
+      title: 'GLY-Smart Bro Giga Surf eLoad 50',
+      description:
+        '1GB + 1GB EVERY DAY for YouTube/iflix/NBA/Cignal & iWant + UNLITEXT to ALL for 3 days',
+      amount: '50',
+    },
+    {
+      sku: 'GLYSMBROSURFMAX85',
+      title: 'GLY-Smart BRO Surf Max 85',
+      description: 'All day surfing valid for 2 days',
+      amount: '85',
     },
   ],
 }

@@ -12,6 +12,7 @@ COPY ./phoenixph-bundle.crt /etc/nginx/certs/
 
 # Expose the listening port
 EXPOSE 80
+EXPOSE 443
 
 # Launch NGINX
 CMD [ "nginx", "-g", "daemon off;" ]
